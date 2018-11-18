@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset="utf-8">
+  <title>CUNY 608 Module 5 by Joel Park</title>
+</head>
+
+<body>
+
+<!-- External JS libraries -->
+<script src="js/d3.min.js" charset="utf-8"></script>
+
+<h1>CUNY 608 Module 5 by Joel Park</h1>
+
+<h2>Module 5 Homework Assignment Information</h2>
+<div class='info'>
+  <p>
+    This is one of the three homework assignments you can complete for this week.
+    You must do two, or you may do all three for extra credit. This is geared towards those of you
+    who have never worked with javascript before.
+  </p>
+  <p>
+    Your assignment should be in the form of an HTML page, which I will be able to run locally.
+    Refer to the file 'js_in_webpage.html' on the github page for instructions on setting up javascript
+    to run on an HTML page, and how to run/debug.
+  </p>
+</div>
+
+<h2>Question 1 Part 1:</h2>
+<div class='Q1_Part_1'>
+  <p>
+    You should complete both of these in 2 (or more) functions on one HTML page.
+  </p>
+  <p>
+    Create a function to reverse any word that you type in. This can be typed into either an input box
+    or an alert box, and then print the result in a box or on the webpage.
+  </p>
+  <div class='jv_program_1'>
+    <form>
+      Please type in your word:<br>
+        <input type="text" name="word" id='word_choice'><br><br>
+        <input type="button" name="submit" value="Submit" onClick="reverseWord();">
+    </form>
+
+    <p id='backwards'>
+    </p>
+
+    <script type="text/javascript">
+
+    function reverseWord() {
+
+      // Reference: https://medium.freecodecamp.org/how-to-reverse-a-string-in-javascript-in-3-different-ways-75e4763c68cb
+      var t, lettersInWord, reversedLetters, joinArray;
+
+      // Step 1. Use the split() method to return a new array
+      t = document.getElementById("word_choice").value;
+      lettersInWord = t.split('');
+
+      // Step 2. Use the reverse() method to reverse the newly created array
+      reversedLetters = lettersInWord.reverse();
+
+      // Step 3. Use the join() method to join all the elements of the array into a string.
+      joinArray = reversedLetters.join("");
+
+      document.getElementById('backwards').innerHTML =  "Reversed Word: " + joinArray;
+    }
+    </script>
+  </div>
+</div>
+
+<h2>Question 1 Part 2:</h2>
+<div class="Q1_Part_2">
+  <p>
+    Create a function that takes an input number, and prints a table with the first 20 multiples
+    of the number, in order 5 x 4.
+  </p>
+  <div class='multiples'>
+    <form>
+      Enter a number:<br>
+        <input type="text" name="number" id='num_choice'><br><br>
+        <input type="button" name="submit" value="Submit" onClick="tableCreate();"><br>
+      </form>
+  </div>
+  <p id='answers'></p>
+
+  <script type="text/javascript">
+  function tableCreate(){
+
+    // Reference: https://stackoverflow.com/questions/14643617/create-table-using-javascript
+    //https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
+
+    // Obtain number from HTML input
+    var t = parseFloat(document.getElementById("num_choice").value);
+    var int_t = t;
+
+    // Clear out prior tables and get the reference for the body
+    document.getElementsByTagName("p")[6].innerHTML = '';
+    var body = document.getElementsByTagName("p")[6];
+
+    // creates a <table> element and a <tbody> element
+    var tbl = document.createElement("table");
+    var tblBody = document.createElement("tbody");
+
+    // Set attributes to the table
+    tbl.style.width='100%';
+    tbl.setAttribute('border', '1');
+
+    // creating all cells
+    for (var i = 0; i < 5; i++) {
+      // creates a table row
+      var row = document.createElement("tr");
+
+      for (var j = 0; j < 4; j++) {
+        // Create a <td> element and a text node, make the text
+        // node the contents of the <td>, and put the <td> at
+        // the end of the table row
+        var cell = document.createElement("td");
+        if (i == 0 && j == 0) {
+          var cellText = document.createTextNode(t);
+        } else {
+          int_t += t;
+          var cellText = document.createTextNode(int_t);
+        }
+        cell.appendChild(cellText);
+        row.appendChild(cell);
+      }
+
+      // add the row to the end of the table body
+      tblBody.appendChild(row);
+    }
+
+    // put the <tbody> in the <table>
+    tbl.appendChild(tblBody);
+    // appends <table> into <body>
+    body.appendChild(tbl);
+  }
+
+  </script>
+</div>
+
+<h2>Question 2:</h2>
+<div class='Q2_Part_1'>
+  <p>
+    Write a function to load the presidents.csv data and display the data as an html table.
+    You may use a csv parser from any available library, though I encourage you to try d3.
+  </p>
+  <p>
+    Now that you have the presidents data loaded, write a function that will return
+    that president's height & weight when you type it in. This can be typed into
+    either an input box or an alert box, and then print the result in a box or on the
+    webpage. Please make sure to type the last name exactly, otherwise, no output will be created.
+  </p>
+  <p>
+    <ul>
+      <li>Washington</li>
+      <li>J. Adams</li>
+      <li>Madison</li>
+      <li>Jackson</li>
+      <li>Taylor</li>
+      <li>Lincoln</li>
+      <li>Hayes</li>
+      <li>Cleveland</li>
+      <li>Taft</li>
+      <li>Wilson</li>
+      <li>Hoover</li>
+      <li>F.D. Roosevelt</li>
+      <li>Truman</li>
+      <li>Eisenhower</li>
+      <li>Kennedy</li>
+      <li>Johnson</li>
+      <li>Nixon</li>
+      <li>Ford</li>
+      <li>Carter</li>
+      <li>Reagan</li>
+      <li>Bush</li>
+      <li>Clinton</li>
+      <li>GW Bush</li>
+    </ul>
+  </p>
+<div class='president_input'>
+   <form>
+      Enter a President's Name:<br>
+        <input type="text" name="President_Name" id='pres_choice'><br><br>
+        <input type="button" name="submit" value="Submit" onClick="presInfo();"><br>
+      </form>
+  </div>
+  <p id="pres_info">
+  </p>
+
+  <script type='text/javascript'>
+
+  function presInfo() {
+    d3.csv("presidents.csv").then(function(data){
+      data.forEach(function(d){
+        d.Height = +d.Height;
+        d.Weight = +d.Weight;
+      });
+
+    document.getElementById('pres_info').innerHTML = "";
+
+    data.forEach(function(d) {
+      var pres = document.getElementById("pres_choice").value;
+      if (d.Name == pres) {
+        document.getElementById('pres_info').innerHTML = "Name: " + d.Name + ", Weight: "
+          + d.Weight + " , Height: " + d.Height;
+      }
+    })
+    });
+  };
+
+  </script>
+</div>
+
+</body>
+</html>
